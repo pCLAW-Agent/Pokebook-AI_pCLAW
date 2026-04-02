@@ -1,0 +1,382 @@
+.labels{
+    color: #717171;
+}
+.swap-loader{
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:100%;
+
+background:#000;
+
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+
+z-index:10;
+}
+
+.loader-spinner{
+width:40px;
+height:40px;
+
+border:3px solid #003c40;
+border-top:3px solid #00f0ff;
+
+border-radius:50%;
+
+animation:spin 1s linear infinite;
+margin-bottom:10px;
+}
+
+@keyframes spin{
+0%{ transform:rotate(0deg); }
+100%{ transform:rotate(360deg); }
+}
+#swapBtn{
+position:fixed;
+bottom:20px;
+right:20px;
+
+background:#111;
+color:#00f0ff;
+
+border:1px solid #00f0ff;
+padding:12px 18px;
+font-weight:bold;
+
+cursor:pointer;
+
+z-index:9999;
+border-radius:6px;
+
+opacity:0.6; /* default non-active */
+}
+
+/* MODAL */
+.swap-modal{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+
+background:rgba(0,0,0,0.8);
+
+display:none;
+align-items:center;
+justify-content:center;
+
+z-index:1000;
+}
+
+/* CONTAINER */
+.swap-container{
+width:380px;
+height:80%;
+
+background:#000;
+border:1px solid #00f0ff;
+
+display:flex;
+flex-direction:column;
+}
+
+/* HEADER */
+.swap-header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+
+padding:10px;
+border-bottom:1px solid #00f0ff;
+
+color:#00f0ff;
+}
+
+/* IFRAME */
+#swapFrame{
+flex:1;
+border:none;
+}
+.active{
+    color: #00ffaa;
+    background-color: #2d2d2d;
+    border-radius: 10px;
+}
+.active-ver{
+    color: #ffaf00;
+}
+.verified-badge{
+color:#ffaf00;
+margin-left:-2px;
+font-size:14px;
+vertical-align:middle;
+}
+*{
+box-sizing:border-box;
+margin:0;
+padding:0;
+}
+.card,
+.terminal,
+.sidebar{
+
+border:1px solid !important;
+border-image: linear-gradient(135deg, #00f0ff, #7a00ff) 1 !important;
+ 
+}
+body{
+
+background:#000;
+color:#00f0ff;
+font-family:monospace;
+height:100vh;
+overflow:hidden;
+
+}
+
+.pre-token{
+    font-size: 10px;
+}
+/* APP LAYOUT */
+
+.app{
+
+display:flex;
+height:100vh;
+
+}
+
+
+.hamburger{
+
+display:none;
+font-size:22px;
+cursor:pointer;
+
+}
+/* MAIN */
+
+.main{
+
+flex:1;
+display:flex;
+flex-direction:column;
+height:100vh;
+overflow-y: auto;
+
+}
+
+/* TOPBAR */
+
+.topbar{
+
+display:flex;
+gap:10px;
+align-items:center;
+
+padding:12px;
+
+background:#080808;
+border-bottom:1px solid #00f0ff;
+
+}
+
+.topbar input{
+
+flex:1;
+
+background:#000;
+border:1px solid #00f0ff;
+
+padding:10px;
+color:#00f0ff;
+
+}
+
+.topbar button{
+
+background:#000;
+border:1px solid #00f0ff;
+
+padding:10px 16px;
+color:#00f0ff;
+cursor:pointer;
+
+}
+
+.topbar button:hover{
+
+background:#00f0ff;
+color:#000;
+
+}
+
+/* DASHBOARD */
+
+.dashboard{
+
+display:grid;
+
+grid-template-columns:1fr 1fr;
+
+gap:12px;
+
+padding:12px;
+
+}
+
+.card{
+
+background:#050505;
+border:1px solid #00f0ff;
+
+padding:12px;
+
+min-height:140px;
+
+}
+
+.card h3{
+
+color:#00ffaa;
+margin-bottom:10px;
+
+}
+
+/* TERMINAL */
+
+.terminal{
+
+flex:1;
+display:flex;
+flex-direction:column;
+
+margin:12px;
+
+border:1px solid #00f0ff;
+
+min-height:0;
+
+}
+
+.terminal-header{
+
+background:#0a0a0a;
+
+padding:8px;
+
+text-align:center;
+
+border-bottom:1px solid #00f0ff;
+
+}
+
+.terminal-body{
+
+flex:1;
+
+overflow-y:auto;
+
+padding:12px;
+
+font-size:14px;
+
+}
+
+/* AGENT FEED */
+
+.agent-post{
+
+display:flex;
+gap:12px;
+padding:10px;
+
+border-bottom:1px dashed #003c40;
+
+}
+
+.agent-post:hover{
+
+background:#021214;
+
+}
+
+.agent-avatar{
+
+width:36px;
+height:36px;
+
+border-radius:50%;
+
+border:1px solid #00f0ff;
+
+object-fit:cover;
+
+}
+
+.agent-content{
+
+flex:1;
+
+}
+
+.agent-username{
+
+color:#00ffaa;
+font-size:13px;
+margin-bottom:4px;
+
+}
+
+.agent-text{
+
+color:#00f0ff;
+font-size:14px;
+line-height:1.4;
+
+}
+
+.agent-meta{
+
+font-size:11px;
+color:#007c84;
+margin-top:4px;
+
+}
+
+/* MOBILE */
+
+@media (max-width:900px){
+.pre-token{
+    font-size: 6px;
+}
+.hamburger{
+
+display:block;
+
+}
+
+.dashboard{
+
+grid-template-columns:1fr;
+
+}
+
+.topbar{
+
+flex-direction:column;
+align-items:stretch;
+
+}
+
+.terminal{
+
+margin:12px;
+
+}
+
+}

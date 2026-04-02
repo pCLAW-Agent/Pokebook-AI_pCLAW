@@ -1,0 +1,185 @@
+.agent-list{
+display:grid;
+grid-template-columns:repeat(auto-fill,minmax(200px,1fr));
+gap:15px;
+margin-top:15px;
+}
+
+.agent-card{
+   
+display:flex;
+align-items:center;
+gap:12px;
+background:#111;
+border:1px solid #222;
+padding:12px;
+border-radius:10px;
+transition:0.2s;
+cursor:pointer;
+}
+
+.agent-card:hover{
+border-color:#00f0ff;
+transform:translateY(-2px);
+}
+
+.agent-avatar{
+width:45px;
+height:45px;
+border-radius:50%;
+object-fit:cover;
+}
+
+.agent-info{
+display:flex;
+flex-direction:column;
+}
+
+.agent-username{
+font-weight:600;
+color:#fff;
+display:flex;
+align-items:center;
+gap:6px;
+}
+
+.agent-category{
+font-size:12px;
+color:#888;
+margin-top:2px;
+}
+
+
+/* VERIFIED GOLD */
+.verified-badge{
+color:gold;
+font-size:12px;
+}
+/* =========================
+   MAIN LAYOUT
+========================= */
+
+.main{
+flex:1;
+display:flex;
+flex-direction:column;
+overflow-y:auto;   
+height:100vh;
+}
+
+/* =========================
+   DASHBOARD (3 COL FIX)
+========================= */
+.dashboard{
+display:grid;
+grid-template-columns: repeat(3, 1fr);
+gap:16px;
+padding:16px;
+}
+
+/* =========================
+   CARD
+========================= */
+.card{
+border:1px solid rgba(0,240,255,0.3);
+padding:20px;
+text-align:center;
+background:rgba(0,240,255,0.03);
+}
+
+.card h3{
+font-size:12px;
+opacity:0.7;
+margin-bottom:10px;
+}
+
+.card div{
+font-size:26px;
+color:#00ffaa;
+font-weight:bold;
+}
+
+/* =========================
+   FILTER 
+========================= */
+.filters{
+display:flex;
+gap:10px;
+padding:0 16px 16px 16px;
+}
+
+.filters input,
+.filters button{
+border:1px solid #00f0ff;
+background:#000;
+color:#00f0ff;
+padding:6px 10px;
+}
+
+/* =========================
+   CHART 
+========================= */
+.chart-box{
+margin:0 16px 16px 16px;
+padding:16px;
+border:1px solid rgba(0,240,255,0.3);
+}
+
+/* =========================
+   TERMINAL
+========================= */
+.terminal{
+margin:16px;
+border:1px solid #00f0ff;
+display:flex;
+flex-direction:column;
+
+
+min-height:250px;  
+height:40vh;       
+max-height:500px;  
+}
+
+.terminal-body{
+flex:1;
+overflow-y:auto;
+padding:12px;
+}
+.agent-section{
+margin-top:30px;
+ margin: 0 16px 16px 16px;
+}
+
+.agent-filters{
+display:flex;
+gap:10px;
+margin-bottom:15px;
+}
+
+.agent-filters input,
+.agent-filters select{
+padding:8px;
+background:#111;
+border:1px solid #333;
+color:#fff;
+}
+
+.agent-list{
+display:grid;
+grid-template-columns:repeat(auto-fill,minmax(250px,1fr));
+gap:15px;
+}
+/* =========================
+   RESPONSIVE
+========================= */
+@media (max-width:900px){
+.dashboard{
+grid-template-columns: repeat(2,1fr);
+}
+}
+
+@media (max-width:500px){
+.dashboard{
+grid-template-columns: 1fr;
+}
+}

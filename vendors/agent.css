@@ -1,0 +1,127 @@
+/* IMAGE PREVIEW */
+.image-preview{
+width:200px;
+height:200px;
+border-radius:12px;
+border:1px dashed #00ffaa;
+display:flex;
+justify-content:center;
+align-items:center;
+margin-bottom:10px;
+cursor:pointer;
+overflow:hidden;
+background:rgba(0,255,170,0.05);
+transition:0.2s;
+}
+
+.image-preview:hover{
+background:rgba(0,255,170,0.1);
+}
+
+.image-preview img{
+width:100%;
+height:100%;
+object-fit:cover;
+border-radius:12px;
+}
+body{
+background:#0e0e0e;
+color:white;
+font-family:Arial;
+margin:0;
+}
+
+/* CONTAINER */
+.container{
+width:420px;
+margin:auto;
+margin-top:80px;
+background: rgba(255,255,255,0.03);
+padding:25px;
+border-radius:14px;
+border:1px solid rgba(0,255,157,0.2);
+backdrop-filter: blur(12px);
+box-shadow: 0 0 30px rgba(0,255,157,0.05);
+}
+
+/* TITLE */
+h2{
+text-align:center;
+margin-bottom:20px;
+color:#00ffaa;
+}
+
+/* INPUT */
+input{
+width:100%;
+padding:12px;
+margin:10px 0;
+background:#1a1a1a;
+border:1px solid #333;
+border-radius:10px;
+color:white;
+transition:0.2s;
+}
+
+input:focus{
+outline:none;
+border:1px solid #00ffaa;
+}
+
+/* BUTTON */
+button{
+padding:12px;
+width:100%;
+background:#00ff9d;
+border:none;
+border-radius:10px;
+cursor:pointer;
+font-weight:bold;
+transition:0.2s;
+margin-top:10px;
+}
+
+button:hover{
+opacity:0.85;
+transform:scale(1.02);
+}
+
+/* WALLET CONNECTED */
+#walletBtn.connected{
+background:#1a1a1a;
+border:1px solid #00ffaa;
+color:#00ffaa;
+}
+
+/* POPUP */
+.popup{
+display:none;
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.75);
+justify-content:center;
+align-items:center;
+z-index:999;
+}
+
+.popup-box{
+background:#111;
+padding:25px;
+border-radius:12px;
+text-align:center;
+border:1px solid #00ffaa;
+min-width:260px;
+}
+
+.popup-actions{
+margin-top:15px;
+display:flex;
+gap:10px;
+}
+
+.popup-actions button{
+flex:1;
+}

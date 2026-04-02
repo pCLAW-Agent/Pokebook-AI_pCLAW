@@ -1,0 +1,394 @@
+/* Super Agent Stats */
+#superAgentStats {
+    margin-top: 20px;
+}
+
+.super-stats-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.super-stat {
+    background: #001214;
+    padding: 14px 18px;
+    border-radius: 10px;
+    border: 1px solid #003c40;
+    text-align: center;
+}
+
+.super-stat span {
+    display: block;
+    font-size: 12.5px;
+    color: #00ccff;
+    margin-bottom: 6px;
+}
+
+.super-stat b {
+    font-size: 24px;
+    color: #00ffaa;
+}
+
+/* Group List - Feed */
+.group-feed-item {
+    margin-bottom: 10px;
+}
+
+.group-feed-link {
+    display: block;
+    background: #00191f;
+    padding: 14px 16px;
+    border-radius: 10px;
+    color: #ffffff;
+    text-decoration: none;
+    border: 1px solid #003c40;
+    transition: all 0.3s;
+}
+
+.group-feed-link:hover {
+    border-color: #00f0ff;
+    background: #002529;
+}
+
+.group-feed-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.group-feed-title {
+    font-size: 15px;
+    color: #00ffcc;
+}
+
+.group-feed-members {
+    font-size: 13px;
+    color: #00ccff;
+    background: rgba(0, 204, 255, 0.1);
+    padding: 4px 10px;
+    border-radius: 20px;
+}
+
+.no-groups {
+    text-align: center;
+    padding: 20px;
+    color: #666;
+    font-style: italic;
+}
+.radar-stat{
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: 1px solid transparent;
+}
+
+.radar-stat:hover{
+    background: #001f22;
+    border: 1px solid #00f0ff;
+    transform: translateY(-2px);
+}
+
+.radar-stat:hover i{
+    color: #00f0ff;
+    text-shadow: 0 0 8px #00f0ff;
+}
+/* =========================
+PROFILE FEED WRAPPER
+========================= */
+.profile-feed{
+    margin-top:15px;
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+}
+
+/* =========================
+POST CARD (MAIN FIX)
+========================= */
+.post-card{
+    display:flex;
+    gap:10px;
+    background:#0f0f0f;
+    border:1px solid #1f1f1f;
+    border-radius:14px;
+    padding:12px;
+    transition:0.2s ease;
+}
+
+.post-card:hover{
+    border-color:#00f0ff33;
+    transform:translateY(-1px);
+}
+
+/* =========================
+AVATAR LEFT
+========================= */
+.post-avatar{
+    width:38px;
+    height:38px;
+    border-radius:50%;
+    object-fit:cover;
+    flex-shrink:0;
+    border:1px solid #00f0ff55;
+}
+
+/* =========================
+RIGHT CONTENT
+========================= */
+.post-body{
+    flex:1;
+    display:flex;
+    flex-direction:column;
+    gap:6px;
+}
+
+/* USER ROW */
+.post-header{
+    display:flex;
+    align-items:center;
+    gap:6px;
+}
+
+/* USERNAME */
+.post-username{
+    font-size:13px;
+    font-weight:600;
+    color:#fff;
+}
+
+/* VERIFIED */
+.post-verified{
+    color:#00f0ff;
+    font-size:12px;
+}
+
+/* TIME */
+.post-time{
+    font-size:11px;
+    color:#555;
+    margin-left:auto;
+}
+
+/* TEXT */
+.post-text{
+    font-size:14px;
+    color:#d6d6d6;
+    line-height:1.4;
+    word-break:break-word;
+}
+/* =========================
+   PROFILE WRAPPER ONLY
+========================= */
+
+.profile-container{
+width:100%;
+max-width:600px;
+margin:0 auto;
+position:relative;
+z-index:2;
+}
+
+/* =========================
+   PROFILE CARD
+========================= */
+
+.profile-card{
+display:flex;
+gap:18px;
+align-items:flex-start;
+
+padding:22px;
+
+/*background: rgba(255,255,255,0.05);*/
+/*backdrop-filter: blur(16px);*/
+
+/*border:1px solid rgba(255,255,255,0.1);*/
+/*border-radius:18px;*/
+
+/*box-shadow:*/
+/*0 0 30px rgba(0,255,200,0.08),*/
+/*inset 0 0 20px rgba(255,255,255,0.03);*/
+
+transition:0.3s ease;
+width:100%;
+}
+
+/*.profile-card:hover{*/
+/*transform: translateY(-5px);*/
+/*box-shadow:*/
+/*0 0 40px rgba(0,255,200,0.15),*/
+/*0 0 80px rgba(0,255,200,0.05);*/
+/*}*/
+
+/* =========================
+   AVATAR
+========================= */
+
+.avatar-wrap{
+position:relative;
+}
+
+.profile-avatar{
+width:90px;
+height:90px;
+border-radius:50%;
+object-fit:cover;
+
+border:2px solid rgba(0,255,200,0.5);
+box-shadow:0 0 20px rgba(0,255,200,0.3);
+}
+
+.online-dot{
+position:absolute;
+bottom:8px;
+right:8px;
+width:12px;
+height:12px;
+background:#00ff99;
+border-radius:50%;
+box-shadow:0 0 10px #00ff99;
+}
+
+/* =========================
+   TEXT
+========================= */
+
+.profile-info h2{
+margin:0;
+font-size:18px;
+display:flex;
+align-items:center;
+gap:8px;
+}
+
+.profile-info p{
+color:#9ca3af;
+margin:4px 0 10px;
+}
+
+.verified{
+color:#00ffcc;
+display:none;
+filter:drop-shadow(0 0 6px #00ffcc);
+}
+
+/* =========================
+   STATS
+========================= */
+
+.top-stats{
+display:flex;
+gap:10px;
+margin-top:10px;
+}
+
+.stat{
+flex:1;
+background:rgba(255,255,255,0.05);
+border:1px solid rgba(255,255,255,0.08);
+padding:10px;
+border-radius:12px;
+}
+
+.stat span{
+font-size:10px;
+color:#9ca3af;
+}
+
+.stat b{
+display:block;
+margin-top:4px;
+font-size:14px;
+color:#fff;
+}
+
+/* =========================
+   TOKEN BOX
+========================= */
+
+.token-address-box{
+margin-top:12px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+
+padding:12px;
+
+background: linear-gradient(135deg, rgba(0,255,200,0.08), rgba(255,255,255,0.02));
+border:1px solid rgba(0,255,200,0.15);
+border-radius:12px;
+
+cursor:pointer;
+transition:0.3s;
+}
+
+.token-address-box:hover{
+transform:scale(1.01);
+box-shadow:0 0 25px rgba(0,255,200,0.12);
+}
+
+.token-left span{
+font-size:10px;
+color:#9ca3af;
+letter-spacing:1px;
+}
+
+#tokenAddress{
+font-size:12px;
+color:#00ffcc;
+margin-top:3px;
+word-break:break-all;
+}
+
+#tokenPrice{
+font-size:14px;
+font-weight:bold;
+color:#fff;
+}
+
+/* =========================
+   COPY BUTTON
+========================= */
+
+.copy-btn{
+width:34px;
+height:34px;
+display:flex;
+justify-content:center;
+align-items:center;
+
+border-radius:10px;
+
+background:rgba(0,255,200,0.1);
+border:1px solid rgba(0,255,200,0.3);
+
+cursor:pointer;
+transition:0.2s;
+}
+
+.copy-btn i{
+color:#00ffcc;
+font-size:14px;
+}
+
+.copy-btn:hover{
+transform:scale(1.1);
+background:rgba(0,255,200,0.2);
+}
+
+/* =========================
+   RESPONSIVE ONLY CARD
+========================= */
+
+@media (max-width:768px){
+
+.profile-card{
+flex-direction:column;
+align-items:flex-start;
+}
+
+.profile-container{
+max-width:100%;
+padding:10px;
+}
+}
