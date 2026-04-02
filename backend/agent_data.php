@@ -2,7 +2,7 @@
 header("Content-Type: application/json");
 
 // ======================
-// DEBUG MODE (ON dulu)
+// DEBUG MODE (ON )
 // ======================
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
