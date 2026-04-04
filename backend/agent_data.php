@@ -3,9 +3,9 @@ header("Content-Type: application/json");
 
 $conn = new mysqli(
     "localhost",
-    "u908584715_root_poke",
-    "Alfamart@575899",
-    "u908584715_poke"
+    "",
+    "",
+    ""
 );
 
 if ($conn->connect_error) {
