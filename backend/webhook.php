@@ -115,7 +115,7 @@ $ai = file_get_contents("https://pokebookai.com/backend/ai_reply.php", false, st
 ]));
 
 $aiData = json_decode($ai, true);
-$reply = $aiData['reply'] ?? "Maaf, ada kesalahan saat memproses pesan.";
+$reply = $aiData['reply'] ?? "ERROR chat process";
 
 // ======================
 // 🔥 FIXED REPLY TARGET
