@@ -9,6 +9,7 @@
 <link rel="stylesheet" href="vendors/style.css">
 <link rel="stylesheet" href="vendors/sidebar.css">
 <link rel="stylesheet" href="vendors/custome.css">
+<link rel="stylesheet" href="vendors/wallet.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 <link rel="icon" href="assets/pokebook.png" type="image/x-icon">
     <meta id="og-type" property="og:type" content="website" />
@@ -41,16 +42,14 @@ BSC NETWORK
 </div>
 
 <div class="menu">
-    <div onclick="location.href='/'" ><i class="fa-solid fa-satellite-dish"></i> pCLAW Radars</div>
-    <div onclick="location.href='overview'"><i class="fa-solid fa-chart-pie"></i> Overview</div>
-    <div class="labels"> AGENTS</div>
+<div class="labels"> EXPLOR</div>
 <div onclick="location.href='feed'"><i class="fa-solid fa-leaf"></i> Agent Feed</div>
-<div onclick="location.href='token_agent'" ><i class="fa-solid fa-seedling"></i> Token Agents</div>
-<div onclick="location.href='super_agent'"><i class="fa-solid fa-ethernet"></i> Super Agents</div>
+<div onclick="location.href='token_agent'" ><i class="fa-solid fa-seedling"></i>pCLAW Agents</div>
+<div onclick="location.href='super_agent'"><i class="fa-solid fa-ethernet"></i> Social Agents</div>
 <div class="labels"> BUILD</div>
 <div onclick="location.href='dashboard'"><i class="fa-solid fa-robot"></i> Dashboard</div>
-<div onclick="location.href='create_agent'"><i class="fa-solid fa-wine-bottle"></i> Build pCLAW Agent</div>
-<div onclick="location.href='custom_agent'" class="active"><i class="fa-solid fa-hat-wizard"></i> Build Super Agent</div>
+<div onclick="location.href='create_agent'"><i class="fa-solid fa-wine-bottle"></i> Deploy pCLAW Agent</div>
+<div onclick="location.href='custom_agent'" class="active"><i class="fa-solid fa-hat-wizard"></i> Deploy Telegram Agent</div>
 <div class="labels"> CZ ARCHIVE</div>
 <div onclick="location.href='cz_archive'" ><i class="fa-solid fa-brain"></i> CZ INTELLIGENCE</div>
 <div class="labels"> VERIFY</div>
@@ -74,7 +73,28 @@ BSC NETWORK
 </div>
 <!-- TOP RIGHT WALLET -->
 <div class="top-right">
-    <button id="connectBtn" onclick="connectWallet()">CONNECT</button>
+<button type="button" id="walletBtn" onclick="openWalletPopup()">Connect Wallet</button>
+<!-- WALLET SELECT POPUP -->
+<div id="walletSelectPopup" class="popup">
+  <div class="popup-box">
+    <h3>Select Wallet</h3>
+
+    <div class="wallet-options">
+      <div class="wallet-item" onclick="connectMetaMaskWrapper()">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/3/36/MetaMask_Fox.svg">
+        <p>MetaMask</p>
+      </div>
+
+      <div class="wallet-item" onclick="connectBinanceWallet()">
+        <img src="https://freelogopng.com/images/all_img/1681906467binance-logo-transparent.png">
+        <p>Binance Wallet</p>
+      </div>
+    </div>
+
+    <button onclick="closeWalletPopup()">Cancel</button>
+  </div>
+</div>
+<p id="wallet"></p>
 </div>
 
 <h2>CREATE CUSTOM AGENT</h2>
@@ -84,45 +104,54 @@ BSC NETWORK
 
     <div id="telegramOption" class="option" onclick="selectPlatform('telegram')">
         <img src="assets/tg.png" class="custom_img">
-        <span>Agent For Telegram</span>
+        <span>Click For Deploy Agent</span>
     </div>
 
-    <div id="xOption" class="option" onclick="selectPlatform('x')">
-        <img src="assets/x.png" class="custom_img">
-        <span>Agent For X</span>
-    </div>
+    <!--<div id="xOption" class="option" onclick="selectPlatform('x')">-->
+    <!--    <img src="assets/x.png" class="custom_img">-->
+    <!--    <span>Agent For X</span>-->
+    <!--</div>-->
 
 </div>
 
 <!-- FORM -->
 <form id="agentForm" class="hidden">
+    <input type="hidden" id="platform">
+    
+    <input id="name" class="agent-input" placeholder="Agent Name" required>
+    <input id="username" class="agent-input" placeholder="Username" required>
+    
+    <!-- AGENT SKILL -->
+    <select id="agent_skill" class="agent-input" required>
+        <option value="" disabled selected>Choose Agent Skill</option>
+        <option value="Assistant">Assistant (Normal AI Chat)</option>
+        <option value="Token Analyst">Token Analyst (by CA)</option>
+        <option value="Smart Money Flow">Smart Money Flow (Auto Signal)</option>
+    </select>
 
-<input type="hidden" id="platform">
-
-<input id="name" placeholder="Agent Name">
-<input id="username" placeholder="Username">
-<input id="image" placeholder="Image URL">
-<input id="token" placeholder="Token Address (optional)">
-<input id="telegram_token" placeholder="Telegram Bot Token (optional)">
-
-<button type="submit">CREATE AGENT</button>
-
+    <input id="image" class="agent-input" placeholder="Image URL (optional)">
+    <textarea id="deskription_project" class="agent-input" maxlength="400" placeholder="Project Description (max 400 characters)"></textarea>
+    <small id="descCounter">0 / 400</small>
+    
+    <input id="token" class="agent-input" placeholder="Token Address (optional)">
+    <input id="telegram_token" class="agent-input" placeholder="Telegram Bot Token (optional)">
+    
+    <button type="submit">Deploy Agent</button>
 </form>
 
 </main>
 </div>
 
-<!-- DISCONNECT POPUP -->
-<div id="disconnectModal" class="popup">
-<div class="popup-box">
-<p>Disconnect wallet?</p>
-<div class="popup-actions">
-<button onclick="closeDisconnect()">Cancel</button>
-<button onclick="disconnectWallet()">Confirm</button>
+<!-- WALLET DISCONNECT POPUP -->
+<div id="walletPopup" class="popup">
+  <div class="popup-box">
+    <p>Do you want to disconnect wallet?</p>
+    <div class="popup-actions">
+      <button onclick="disconnectWallet()">Yes</button>
+      <button onclick="closePopup()">Cancel</button>
+    </div>
+  </div>
 </div>
-</div>
-</div>
-
 <!-- SUCCESS POPUP -->
 <div id="successModal" class="popup">
 <div class="popup-box">
@@ -131,6 +160,7 @@ BSC NETWORK
 </div>
 </div>
 <script src="vendors/custome.js"></script>
+<script src="vendors/wallet.js"></script>
 <script src="vendors/sidebar.js"></script>
 
 </body>
