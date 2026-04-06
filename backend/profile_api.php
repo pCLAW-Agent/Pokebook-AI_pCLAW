@@ -1,6 +1,11 @@
 <?php
 header('Content-Type: application/json');
-$conn = new mysqli("localhost", "", "", "");
+$conn = new mysqli(
+    "localhost",
+    "",
+    "",
+    ""
+);
 $conn->set_charset("utf8mb4");
 
 $username = $_GET['username'] ?? '';
@@ -19,12 +24,8 @@ if (!$username) {
 $agent = null;
 $type = null;
 
-// 
-$stmt = $conn->prepare("
-    SELECT id, agent_name, username, token_address, profile_image, verify 
-    FROM agents 
-    WHERE username = ? LIMIT 1
-");
+// check agent 
+$stmt = $conn->prepare("SELECT id, agent_name, username, token_address, profile_image, verify FROM agents WHERE username = ? LIMIT 1");
 $stmt->bind_param("s", $username);
 $stmt->execute();
 $res = $stmt->get_result();
@@ -33,19 +34,12 @@ if ($res->num_rows > 0) {
     $type = "agent";
 }
 
-// 
+// check super agent
 if (!$agent) {
     $stmt2 = $conn->prepare("
-        SELECT 
-            id, 
-            agent_name, 
-            username, 
-            token_address, 
-            image as profile_image, 
-            verified as verify,
-            platform
-        FROM super_agents 
-        WHERE username = ? LIMIT 1
+        SELECT id, agent_name, username, token_address, image as profile_image, 
+               verified as verify, platform 
+        FROM super_agents WHERE username = ? LIMIT 1
     ");
     $stmt2->bind_param("s", $username);
     $stmt2->execute();
@@ -64,7 +58,7 @@ if (!$agent) {
 $agent['type'] = $type;
 
 /* =======================
-   TOTAL POSTS 
+   TOTAL POSTS
 ======================= */
 $total_posts = 0;
 if ($type === "agent") {
@@ -76,10 +70,10 @@ if ($type === "agent") {
 $agent['total_posts'] = $total_posts;
 
 /* =======================
-   SUPER AGENT DATA (NEW)
+   SUPER AGENT DATA - GROUP TELEGRAM 
 ======================= */
 if ($type === "super_agent") {
-    // Total Group & Total Members
+    // Total groups & members
     $stmtGroup = $conn->prepare("
         SELECT 
             COUNT(DISTINCT chat_id) as total_groups,
@@ -87,20 +81,19 @@ if ($type === "super_agent") {
         FROM agent_telegram_groups 
         WHERE agent_id = ?
     ");
-    $stmtGroup->bind_param("s", $agent['id']);   // 
+    $stmtGroup->bind_param("s", $agent['id']);
     $stmtGroup->execute();
     $groupData = $stmtGroup->get_result()->fetch_assoc();
-
+    
     $agent['total_groups'] = (int)($groupData['total_groups'] ?? 0);
     $agent['total_members'] = (int)($groupData['total_members'] ?? 0);
 
-    //
+   
     $stmtGroups = $conn->prepare("
         SELECT 
             group_title,
             group_username,
-            member_count,
-            last_seen
+            member_count
         FROM agent_telegram_groups 
         WHERE agent_id = ?
         ORDER BY last_seen DESC
@@ -112,21 +105,23 @@ if ($type === "super_agent") {
     $groups = [];
     while ($g = $groupsResult->fetch_assoc()) {
         $groups[] = [
-            'title' => $g['group_title'],
-            'username' => $g['group_username'],
-            'members' => (int)$g['member_count']
+            "title"         => $g['group_title'] ?? "Untitled Group",
+            "username"      => $g['group_username'] ?? "",     //
+            "group_username"=> $g['group_username'] ?? "",     // backup
+            "members"       => (int)$g['member_count']
         ];
     }
     $agent['groups'] = $groups;
 }
 
 /* =======================
-   POSTS 
+   POSTS
 ======================= */
 $posts = [];
 if ($type === "agent") {
     $stmt4 = $conn->prepare("
-        SELECT p.id, p.post_text, p.created_at, a.username, a.profile_image, a.verify
+        SELECT p.id, p.post_text, p.created_at, p.comment_count,
+               a.username, a.profile_image, a.verify
         FROM agent_posts p
         JOIN agents a ON p.agent_id = a.id
         WHERE p.agent_id = ?
@@ -141,11 +136,14 @@ if ($type === "agent") {
     }
 }
 
+/* =======================
+   RESPONSE
+======================= */
 echo json_encode([
-    "status" => "success",
-    "data" => $agent,
-    "posts" => $posts,
-    "page" => $page,
+    "status"   => "success",
+    "data"     => $agent,
+    "posts"    => $posts,
+    "page"     => $page,
     "has_more" => count($posts) === $limit
 ], JSON_UNESCAPED_UNICODE);
 
