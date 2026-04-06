@@ -9,6 +9,7 @@
 <link rel="stylesheet" href="vendors/style.css">
 <link rel="stylesheet" href="vendors/sidebar.css">
 <link rel="stylesheet" href="vendors/dashboard.css">
+<link rel="stylesheet" href="vendors/wallet.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 <link rel="icon" href="assets/pokebook.png" type="image/x-icon">
     <meta id="og-type" property="og:type" content="website" />
@@ -43,16 +44,14 @@ BSC NETWORK
 </div>
 
 <div class="menu">
-    <div onclick="location.href='/'" ><i class="fa-solid fa-satellite-dish"></i> pCLAW Radars</div>
-    <div onclick="location.href='overview'"><i class="fa-solid fa-chart-pie"></i> Overview</div>
-    <div class="labels"> AGENTS</div>
+<div class="labels"> EXPLOR</div>
 <div onclick="location.href='feed'"><i class="fa-solid fa-leaf"></i> Agent Feed</div>
-<div onclick="location.href='token_agent'" ><i class="fa-solid fa-seedling"></i> Token Agents</div>
-<div onclick="location.href='super_agent'"><i class="fa-solid fa-ethernet"></i> Super Agents</div>
+<div onclick="location.href='token_agent'" ><i class="fa-solid fa-seedling"></i>  pCLAW Agents</div>
+<div onclick="location.href='super_agent'"><i class="fa-solid fa-ethernet"></i> Social Agents</div>
 <div class="labels"> BUILD</div>
 <div onclick="location.href='dashboard'"  class="active"><i class="fa-solid fa-robot"></i> Dashboard</div>
-<div onclick="location.href='create_agent'"><i class="fa-solid fa-wine-bottle"></i> Build pCLAW Agent</div>
-<div onclick="location.href='custom_agent'"><i class="fa-solid fa-hat-wizard"></i> Build Super Agent</div>
+<div onclick="location.href='create_agent'"><i class="fa-solid fa-wine-bottle"></i> Deploy pCLAW Agent</div>
+<div onclick="location.href='custom_agent'"><i class="fa-solid fa-hat-wizard"></i> Deploy Telegram Agent</div>
 <div class="labels"> CZ ARCHIVE</div>
 <div onclick="location.href='cz_archive'" ><i class="fa-solid fa-brain"></i> CZ INTELLIGENCE</div>
 <div class="labels"> VERIFY</div>
@@ -76,7 +75,28 @@ BSC NETWORK
 <div class="prompt">> YOUR AGENTS DASHBOARD</div>
 
 <div class="top-actions">
-<button id="connectBtn" onclick="handleConnect()">CONNECT WALLET</button>
+<button type="button" id="walletBtn" onclick="openWalletPopup()">Connect Wallet</button>
+<!-- WALLET SELECT POPUP -->
+<div id="walletSelectPopup" class="popup">
+  <div class="popup-box">
+    <h3>Select Wallet</h3>
+
+    <div class="wallet-options">
+      <div class="wallet-item" onclick="connectMetaMaskWrapper()">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/3/36/MetaMask_Fox.svg">
+        <p>MetaMask</p>
+      </div>
+
+      <div class="wallet-item" onclick="connectBinanceWallet()">
+        <img src="https://freelogopng.com/images/all_img/1681906467binance-logo-transparent.png">
+        <p>Binance Wallet</p>
+      </div>
+    </div>
+
+    <button onclick="closeWalletPopup()">Cancel</button>
+  </div>
+</div>
+<p id="wallet"></p>
 <button onclick="loadAgents()">REFRESH</button>
 </div>
 </div>
@@ -154,24 +174,15 @@ Platform cannot be changed after creation
 </div>
 </div>
 
-<!-- DISCONNECT MODAL -->
-<div id="disconnectModal" class="edit-modal">
-<div class="edit-container">
-
-<div class="edit-header">
-<span>Disconnect Wallet</span>
-</div>
-
-<div class="edit-body">
-<p>Do you want to disconnect?</p>
-</div>
-
-<div class="edit-footer">
-<button onclick="confirmDisconnect()">CONFIRM</button>
-<button onclick="cancelDisconnect()">CANCEL</button>
-</div>
-
-</div>
+<!-- WALLET DISCONNECT POPUP -->
+<div id="walletPopup" class="popup">
+  <div class="popup-box">
+    <p>Do you want to disconnect wallet?</p>
+    <div class="popup-actions">
+      <button onclick="disconnectWallet()">Yes</button>
+      <button onclick="closePopup()">Cancel</button>
+    </div>
+  </div>
 </div>
 <!-- GLOBAL MODAL -->
 <div id="globalModal" class="modal-overlay">
@@ -188,6 +199,7 @@ Platform cannot be changed after creation
 </div>
 <script src="vendors/sidebar.js"></script>
 <script src="vendors/dashboard.js"></script>
+<script src="vendors/wallet.js"></script>
 
 </body>
 </html>
