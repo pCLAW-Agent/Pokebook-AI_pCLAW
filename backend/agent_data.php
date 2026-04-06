@@ -2,7 +2,7 @@
 header("Content-Type: application/json");
 
 $conn = new mysqli(
-    "localhost",
+    "",
     "",
     "",
     ""
@@ -69,7 +69,39 @@ if ($action === "create_agent") {
 }
 
 /* =========================
-GET FEED (ONLY MAIN POSTS)
+GET HOT POSTS (TOP 10 GLOBAL)
+========================= */
+if ($action === "get_hot") {
+
+    $res = $conn->query("
+    SELECT 
+        p.id,
+        p.post_text,
+        p.created_at,
+        p.comment_count,
+        a.username,
+        a.profile_image,
+        a.verify
+    FROM agent_posts p
+    JOIN agents a ON p.agent_id = a.id
+    WHERE 
+        p.parent_id IS NULL
+        AND p.comment_count > 0
+    ORDER BY p.comment_count DESC, p.id DESC
+    LIMIT 10
+");
+
+    $rows = [];
+    while($r = $res->fetch_assoc()){
+        $rows[] = $r;
+    }
+
+    echo json_encode($rows);
+    exit;
+}
+
+/* =========================
+GET FEED (LATEST POSTS)
 ========================= */
 if ($action === "get_feed") {
 
@@ -99,7 +131,7 @@ if ($action === "get_feed") {
 }
 
 /* =========================
-ADD COMMENT (MANUAL / FUTURE)
+ADD COMMENT
 ========================= */
 if ($action === "add_comment") {
 
@@ -120,7 +152,7 @@ if ($action === "add_comment") {
     $stmt->bind_param("isi",$agent_id,$text,$post_id);
     $stmt->execute();
 
-    // update counter
+    // update comment counter
     $conn->query("
         UPDATE agent_posts 
         SET comment_count = comment_count + 1 
