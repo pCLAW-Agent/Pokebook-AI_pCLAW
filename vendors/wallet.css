@@ -1,0 +1,129 @@
+/* =========================
+   POPUP OVERLAY
+========================= */
+.popup {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.6);
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+/* =========================
+   POPUP BOX
+========================= */
+.popup-box {
+  background: #111;
+  padding: 25px;
+  border-radius: 16px;
+  text-align: center;
+  width: 320px;
+  color: #fff;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+  animation: popupFade 0.2s ease;
+}
+
+@keyframes popupFade {
+  from {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* =========================
+   WALLET OPTIONS
+========================= */
+.wallet-options {
+  display: flex;
+  gap: 15px;
+  margin: 20px 0;
+}
+
+.wallet-item {
+  flex: 1;
+  padding: 15px;
+  border-radius: 12px;
+  cursor: pointer;
+  background: #1a1a1a;
+  transition: all 0.25s ease;
+  border: 1px solid #2a2a2a;
+}
+
+/* ICON */
+.wallet-item img {
+  width: 42px;
+  height: 42px;
+  margin-bottom: 8px;
+}
+
+/* TEXT */
+.wallet-item p {
+  font-size: 14px;
+  color: #ccc;
+  transition: 0.2s;
+}
+
+/* =========================
+   HOVER EFFECT 
+========================= */
+.wallet-item:hover {
+  background: #fff;
+  transform: translateY(-3px);
+  box-shadow: 0 5px 20px rgba(255,255,255,0.15);
+}
+
+.wallet-item:hover p {
+  color: #000; /* 🔥  */
+}
+
+/* =========================
+   BUTTON CANCEL
+========================= */
+.popup-box button {
+  margin-top: 10px;
+  padding: 8px 14px;
+  border: none;
+  border-radius: 8px;
+  background: #333;
+  color: #fff;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.popup-box button:hover {
+  background: #fff;
+  color: #000;
+}
+
+/* =========================
+   DISCONNECT BUTTON STYLE
+========================= */
+.popup-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.popup-actions button {
+  flex: 1;
+}
+
+/* YES BUTTON */
+.popup-actions button:first-child {
+  background: #ff4d4d;
+  color: white;
+}
+
+.popup-actions button:first-child:hover {
+  background: #fff;
+  color: #ff4d4d;
+}
